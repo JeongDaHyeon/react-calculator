@@ -33,6 +33,8 @@ const evalFunc = function(string) {
   return new Function("return (" + string + ")")();
 };
 
+let dot = true; // check dot is available
+
 class Calculator extends React.Component {
   // TODO: history 추가
   state = {
@@ -46,6 +48,7 @@ class Calculator extends React.Component {
     const operatorKeys = ["÷", "×", "-", "+"];
     const proc = {
       AC: () => {
+        dot = true;
         this.setState({ displayValue: "" });
       },
       BS: () => {
@@ -57,6 +60,7 @@ class Calculator extends React.Component {
       // TODO: 제곱근 구현
       "√": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
+          dot = true;
           displayValue = displayValue.replace("×", "*");
           displayValue = displayValue.replace("÷", "/");
           displayValue = evalFunc(displayValue);
@@ -66,23 +70,28 @@ class Calculator extends React.Component {
       },
       // TODO: 사칙연산 구현
       "÷": () => {
-        this.setState({ displayValue: displayValue + "÷" });
-
+        if (lastChar !== "" && !operatorKeys.includes(lastChar)) { // handling the lastchar is an operator
+          this.setState({ displayValue: displayValue + "÷" });
+          dot = true; // can use dot
+        }
       },
       "×": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           this.setState({ displayValue: displayValue + "×" });
+          dot = true;
         }
       },
       "-": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           this.setState({ displayValue: displayValue + "-" });
+          dot = true;
         }
       },
       "+": () => {
         // + 연산 참고하여 연산 구현
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           this.setState({ displayValue: displayValue + "+" });
+          dot = true;
         }
       },
       "=": () => {
@@ -94,12 +103,14 @@ class Calculator extends React.Component {
 
 
           displayValue = evalFunc(displayValue);
+          dot = true;
         }
         this.setState({ displayValue });
       },
       ".": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           this.setState({ displayValue: displayValue + "." });
+          dot = false;
         }
       },
       "0": () => {
