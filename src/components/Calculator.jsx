@@ -78,7 +78,7 @@ class Calculator extends React.Component {
     let { displayValue = "" } = this.state;
     displayValue = "" + displayValue;
     const lastChar = displayValue.substr(displayValue.length - 1);
-    const fisrtChar = displayValue.substr(0);
+    const fisrtChar = displayValue.substr(0, 1);
     const operatorKeys = ["÷", "×", "-", "+"];
     const proc = {
       AC: () => {
@@ -133,19 +133,18 @@ class Calculator extends React.Component {
       "=": () => {
         if (lastChar !== "" && operatorKeys.includes(lastChar)) {
           displayValue = displayValue.substr(0, displayValue.length - 1);
-        } else if (lastChar !== "") {
+        }
+        else if (lastChar !== "") {
           var eq = displayValue;
-
-          if(fisrtChar==="√"){
-            console.log(displayValue.substr(2, displayValue.length - 1));
-            displayValue = Math.sqrt(evalFunc(displayValue.substr(2, displayValue.length - 1)));
+          if(fisrtChar === "√"){
+            displayValue = Math.sqrt(evalFunc(displayValue.substring(2, displayValue.length - 1)));
           }
           else
           {
-          displayValue = displayValue.replace("×", "*");
-          displayValue = displayValue.replace("÷", "/");
+            displayValue = displayValue.replace("×", "*");
+            displayValue = displayValue.replace("÷", "/");
 
-          displayValue = evalFunc(displayValue);
+            displayValue = evalFunc(displayValue);
           }
           this.setState({ displayValue });
           this.state.history.unshift({equation: eq, result: displayValue});
