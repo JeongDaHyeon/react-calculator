@@ -103,6 +103,8 @@ class Calculator extends React.Component {
         if (lastChar !== "" && operatorKeys.includes(lastChar)) {
           displayValue = displayValue.substr(0, displayValue.length - 1);
         } else if (lastChar !== "") {
+          var eq = displayValue;
+
           displayValue = displayValue.replace("×", "*");
           displayValue = displayValue.replace("÷", "/");
 
