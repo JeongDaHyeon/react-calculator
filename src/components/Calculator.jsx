@@ -44,6 +44,26 @@ class Calculator extends React.Component {
     history: []
   };
 
+  onClickHistory = (event) => {
+    let { displayValue = "" } = this.state;
+    if(event.target.tagName === "DIV")
+    {
+      displayValue = event.target.firstChild.innerText;
+      // console.log(event.target.firstChild.innerText);
+    }
+    if(event.target.className === "equation")
+    {
+      displayValue = event.target.innerText;
+    }
+    else if(event.target.className === "result")
+    {
+      displayValue = event.target.previousSibling.innerText;
+    }
+
+    this.setState({ displayValue: displayValue });
+  };
+
+
   onClickButton = key => {
     let { displayValue = "" } = this.state;
     displayValue = "" + displayValue;
@@ -108,8 +128,11 @@ class Calculator extends React.Component {
           displayValue = displayValue.replace("×", "*");
           displayValue = displayValue.replace("÷", "/");
 
-
           displayValue = evalFunc(displayValue);
+
+          this.setState({ displayValue });
+          this.state.history.unshift({equation: eq, result: displayValue});
+
           dot = true;
         }
         this.setState({ displayValue });
