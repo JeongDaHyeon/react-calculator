@@ -29,11 +29,24 @@ const Box = styled.div`
     margin: 0px;
   }
 `;
-
+// √(√(9x9))
 const evalFunc = function(string) {
   // eslint-disable-next-line no-new-func
   return new Function("return (" + string + ")")();
 };
+
+const nestedRoute = function(string) {
+  if(string.substr(0,1) == "√")
+  {
+    return Math.sqrt( nestedRoute( string.substring(2, string.length - 1) ) );
+  }
+  else
+  {
+    string = string.replace("×", "*");
+    string = string.replace("÷", "/");
+    return evalFunc(string);
+  }
+}
 
 let dot = true; // check dot is available
 
@@ -96,9 +109,16 @@ class Calculator extends React.Component {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           dot = true;
           var eq = displayValue;
-          displayValue = displayValue.replace("×", "*");
-          displayValue = displayValue.replace("÷", "/");
-          displayValue = evalFunc(displayValue);
+          if(displayValue.substr(0,1) == "√")
+          {
+            displayValue = nestedRoute(displayValue);
+          }
+          else
+          {
+            displayValue = displayValue.replace("×", "*");
+            displayValue = displayValue.replace("÷", "/");
+            displayValue = evalFunc(displayValue);
+          }
           displayValue =Math.sqrt(displayValue);
           this.setState({displayValue});
           this.state.history.unshift({equation:"√("+eq+")", result: displayValue});
