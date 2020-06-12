@@ -42,6 +42,7 @@ const nestedRoute = function(string) {
   }
   else
   {
+    alert("?");
     string = string.replace("×", "*");
     string = string.replace("÷", "/");
     return evalFunc(string);
