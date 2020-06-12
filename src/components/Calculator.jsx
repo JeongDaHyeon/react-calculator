@@ -46,19 +46,20 @@ class Calculator extends React.Component {
 
   onClickHistory = (event) => {
     let { displayValue = "" } = this.state;
-    if(event.target.tagName === "DIV")
-    {
-      displayValue = event.target.firstChild.innerText;
-      // console.log(event.target.firstChild.innerText);
-    }
-    if(event.target.className === "equation")
-    {
-      displayValue = event.target.innerText;
-    }
-    else if(event.target.className === "result")
-    {
-      displayValue = event.target.previousSibling.innerText;
-    }
+    displayValue = event.target.className;
+    // if(event.target.tagName === "DIV")
+    // {
+    //   displayValue = event.target.firstChild.innerText;
+    //   // console.log(event.target.firstChild.innerText);
+    // }
+    // if(event.target.className === "equation")
+    // {
+    //   displayValue = event.target.innerText;
+    // }
+    // else if(event.target.className === "result")
+    // {
+    //   displayValue = event.target.previousSibling.innerText;
+    // }
 
     this.setState({ displayValue: displayValue });
   };
@@ -211,8 +212,10 @@ class Calculator extends React.Component {
           {this.state.history.map((history_, index) => {
             return (
               <Box key={index}  onClick={this.onClickHistory}>
-                <h3 className="equation">{history_.equation}</h3>
-                <h3 className="result">= {history_.result}</h3>
+                <h3 className={history_.equation}>{history_.equation}</h3>
+                <h3 className={history_.equation}>= {history_.result}</h3>
+                {/* <h3 className="equation">{history_.equation}</h3>
+                <h3 className="result">= {history_.result}</h3> */}
               </Box>
             )
           })}
