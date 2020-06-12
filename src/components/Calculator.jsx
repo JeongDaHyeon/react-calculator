@@ -137,6 +137,7 @@ class Calculator extends React.Component {
           var eq = displayValue;
 
           if(fisrtChar=="√"){
+            console.log(displayValue.substr(2, displayValue.length - 2));
             displayValue = Math.sqrt(evalFunc(displayValue.substr(2, displayValue.length - 2)));
           }
           else
