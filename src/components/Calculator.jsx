@@ -38,7 +38,8 @@ let dot = true; // check dot is available
 class Calculator extends React.Component {
   // TODO: history 추가
   state = {
-    displayValue: ""
+    displayValue: "",
+    history: []
   };
 
   onClickButton = key => {
