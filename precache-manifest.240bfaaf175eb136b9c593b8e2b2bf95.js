@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ed76c321614b242bde67",
+    "revision": "6a8c450399d6c542f7ea",
     "url": "/react-calculator/static/css/main.26792d45.chunk.css"
   },
   {
-    "revision": "ed76c321614b242bde67",
-    "url": "/react-calculator/static/js/main.ed76c321.chunk.js"
+    "revision": "6a8c450399d6c542f7ea",
+    "url": "/react-calculator/static/js/main.6a8c4503.chunk.js"
   },
   {
     "revision": "13989a7a79a6cd6f08d3",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/react-calculator/static/js/runtime~main.a2ecf2e6.js"
   },
   {
-    "revision": "b5a50cab036b0b25a9cb4eab74e6f198",
+    "revision": "5bf2b1bc68ad06f39ee145cb3f4a75f8",
     "url": "/react-calculator/index.html"
   }
 ];
