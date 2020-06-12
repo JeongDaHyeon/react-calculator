@@ -5,6 +5,8 @@ import Panel from "./Panel";
 import Display from "./Display";
 import ButtonGroup from "./ButtonGroup";
 import Button from "./Button";
+import History from "./History"
+
 
 const Container = styled.div`
   margin: 30px auto;
@@ -62,11 +64,13 @@ class Calculator extends React.Component {
       "√": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
           dot = true;
+          var eq = displayValue;
           displayValue = displayValue.replace("×", "*");
           displayValue = displayValue.replace("÷", "/");
           displayValue = evalFunc(displayValue);
           displayValue =Math.sqrt(displayValue);
           this.setState({displayValue});
+          this.state.history.unshift({equation:"√("+eq+")", result: displayValue});
         }
       },
       // TODO: 사칙연산 구현
@@ -178,7 +182,16 @@ class Calculator extends React.Component {
           </ButtonGroup>
         </Panel>
         {/* TODO: History componet를 이용해 map 함수와 Box styled div를 이용해 history 표시 */}
-
+        <History>
+          {this.state.history.map((history_, index) => {
+            return (
+              <Box key={index}  onClick={this.onClickHistory}>
+                <h3 className="equation">{history_.equation}</h3>
+                <h3 className="result">= {history_.result}</h3>
+              </Box>
+            )
+          })}
+        </History>
       </Container>
     );
   }
