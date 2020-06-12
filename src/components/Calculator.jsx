@@ -59,29 +59,29 @@ class Calculator extends React.Component {
 
   onClickHistory = (event) => {
     let { displayValue = "" } = this.state;
-    displayValue = event.target.className;
-    if(event.target.tagName === "DIV")
-    {
-      displayValue = event.target.firstChild.innerText;
-      // console.log(event.target.firstChild.innerText);
-    }
-    else
-    {
-      displayValue = event.target.className;
-    }
+    // displayValue = event.target.className;
     // if(event.target.tagName === "DIV")
     // {
     //   displayValue = event.target.firstChild.innerText;
     //   // console.log(event.target.firstChild.innerText);
     // }
-    // if(event.target.className === "equation")
+    // else
     // {
-    //   displayValue = event.target.innerText;
+    //   displayValue = event.target.className;
     // }
-    // else if(event.target.className === "result")
-    // {
-    //   displayValue = event.target.previousSibling.innerText;
-    // }
+    if(event.target.tagName === "DIV")
+    {
+      displayValue = event.target.firstChild.innerHTML;
+      // console.log(event.target.firstChild.innerText);
+    }
+    if(event.target.className === "equation")
+    {
+      displayValue = event.target.innerHTML;
+    }
+    else if(event.target.className === "result")
+    {
+      displayValue = event.target.previousSibling.HTML;
+    }
 
     this.setState({ displayValue: displayValue });
   };
