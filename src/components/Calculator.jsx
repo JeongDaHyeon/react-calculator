@@ -108,7 +108,7 @@ class Calculator extends React.Component {
         this.setState({ displayValue });
       },
       ".": () => {
-        if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
+        if (lastChar !== "" && !operatorKeys.includes(lastChar) && dot) {
           this.setState({ displayValue: displayValue + "." });
           dot = false;
         }
