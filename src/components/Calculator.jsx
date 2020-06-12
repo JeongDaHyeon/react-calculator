@@ -136,9 +136,9 @@ class Calculator extends React.Component {
         } else if (lastChar !== "") {
           var eq = displayValue;
 
-          if(fisrtChar=="√"){
-            console.log(displayValue.substr(2, displayValue.length - 2));
-            displayValue = Math.sqrt(evalFunc(displayValue.substr(2, displayValue.length - 2)));
+          if(fisrtChar==="√"){
+            console.log(displayValue.substr(2, displayValue.length - 1));
+            displayValue = Math.sqrt(evalFunc(displayValue.substr(2, displayValue.length - 1)));
           }
           else
           {
