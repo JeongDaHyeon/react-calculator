@@ -46,7 +46,8 @@ class Calculator extends React.Component {
 
   onClickHistory = (event) => {
     let { displayValue = "" } = this.state;
-    displayValue = event.target.className;
+    // displayValue = event.target.className;
+    displayValue = event.target.key;
     // if(event.target.tagName === "DIV")
     // {
     //   displayValue = event.target.firstChild.innerText;
@@ -211,9 +212,9 @@ class Calculator extends React.Component {
         <History>
           {this.state.history.map((history_, index) => {
             return (
-              <Box key={index}  onClick={this.onClickHistory} className={history_.equation}>
-                <h3 className={history_.equation}>{history_.equation}</h3>
-                <h3 className={history_.equation}>= {history_.result}</h3>
+              <Box key={history_.equation}  onClick={this.onClickHistory} className={history_.equation}>
+                <h3 key={history_.equation} className={history_.equation}>{history_.equation}</h3>
+                <h3 key={history_.equation} className={history_.equation}>= {history_.result}</h3>
                 {/* <h3 className="equation">{history_.equation}</h3>
                 <h3 className="result">= {history_.result}</h3> */}
               </Box>
