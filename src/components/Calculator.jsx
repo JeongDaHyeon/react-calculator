@@ -42,9 +42,8 @@ const nestedRoute = function(string) {
   }
   else
   {
-    alert("?");
-    string = string.replace("×", "*");
-    string = string.replace("÷", "/");
+    string = string.replace(/×/g, "*");
+    string = string.replace(/÷/g, "/");
     return evalFunc(string);
   }
 }
@@ -116,8 +115,8 @@ class Calculator extends React.Component {
           }
           else
           {
-            displayValue = displayValue.replace("×", "*");
-            displayValue = displayValue.replace("÷", "/");
+            displayValue = displayValue.replace(/×/g, "*");
+            displayValue = displayValue.replace(/÷/g, "/");
             displayValue = evalFunc(displayValue);
           }
           displayValue =Math.sqrt(displayValue);
@@ -162,8 +161,8 @@ class Calculator extends React.Component {
           }
           else
           {
-            displayValue = displayValue.replace("×", "*");
-            displayValue = displayValue.replace("÷", "/");
+            displayValue = displayValue.replace(/×/g, "*");
+            displayValue = displayValue.replace(/÷/g, "/");
 
             displayValue = evalFunc(displayValue);
           }
