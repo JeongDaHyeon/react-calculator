@@ -211,7 +211,7 @@ class Calculator extends React.Component {
         <History>
           {this.state.history.map((history_, index) => {
             return (
-              <Box key={index}  onClick={this.onClickHistory}>
+              <Box key={index}  onClick={this.onClickHistory} className={history_.equation}>
                 <h3 className={history_.equation}>{history_.equation}</h3>
                 <h3 className={history_.equation}>= {history_.result}</h3>
                 {/* <h3 className="equation">{history_.equation}</h3>
