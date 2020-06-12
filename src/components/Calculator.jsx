@@ -78,6 +78,7 @@ class Calculator extends React.Component {
     let { displayValue = "" } = this.state;
     displayValue = "" + displayValue;
     const lastChar = displayValue.substr(displayValue.length - 1);
+    const fisrtChar = displayValue.substr(0);
     const operatorKeys = ["÷", "×", "-", "+"];
     const proc = {
       AC: () => {
@@ -135,11 +136,16 @@ class Calculator extends React.Component {
         } else if (lastChar !== "") {
           var eq = displayValue;
 
+          if(fisrtChar=="√"){
+            displayValue = Math.sqrt(evalFunc(displayValue.substr(2, displayValue.length - 2)));
+          }
+          else
+          {
           displayValue = displayValue.replace("×", "*");
           displayValue = displayValue.replace("÷", "/");
 
           displayValue = evalFunc(displayValue);
-
+          }
           this.setState({ displayValue });
           this.state.history.unshift({equation: eq, result: displayValue});
 
@@ -223,8 +229,6 @@ class Calculator extends React.Component {
               <Box onClick={this.onClickHistory} className={history_.equation}>
                 <h3 className={history_.equation}>{history_.equation}</h3>
                 <h3 className={history_.equation}>= {history_.result}</h3>
-                {/* <h3 className="equation">{history_.equation}</h3>
-                <h3 className="result">= {history_.result}</h3> */}
               </Box>
             )
           })}
