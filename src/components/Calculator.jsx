@@ -100,6 +100,10 @@ class Calculator extends React.Component {
       },
       BS: () => {
         if (displayValue.length > 0) {
+          if(lastChar === ".")
+          {
+            dot = true;
+          }
           displayValue = displayValue.substr(0, displayValue.length - 1);
         }
         this.setState({ displayValue });
