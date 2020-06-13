@@ -29,12 +29,14 @@ const Box = styled.div`
     margin: 0px;
   }
 `;
-// √(√(9x9))
+
+// calculate the equation
 const evalFunc = function(string) {
   // eslint-disable-next-line no-new-func
   return new Function("return (" + string + ")")();
 };
 
+// calculate if the equation includes route 
 const nestedRoute = function(string) {
   if(string.substr(0,1) == "√")
   {
@@ -54,33 +56,26 @@ class Calculator extends React.Component {
   // TODO: history 추가
   state = {
     displayValue: "",
-    history: []
+    history: [] // store the equation
   };
 
+  // action on history panel
   onClickHistory = (event) => {
     let { displayValue = "" } = this.state;
-    // displayValue = event.target.className;
-    // if(event.target.tagName === "DIV")
-    // {
-    //   displayValue = event.target.firstChild.innerText;
-    //   // console.log(event.target.firstChild.innerText);
-    // }
-    // else
-    // {
-    //   displayValue = event.target.className;
-    // }
+    // if the event target is DIV
     if(event.target.tagName === "DIV")
     {
       displayValue = event.target.firstChild.innerHTML;
-      // console.log(event.target.firstChild.innerText);
     }
+    // if click on the equation h3 tag
     if(event.target.className === "equation")
     {
       displayValue = event.target.innerHTML;
     }
+    // if click on the result h3 tag
     else if(event.target.className === "result")
     {
-      displayValue = event.target.previousSibling.HTML;
+      displayValue = event.target.previousSibling.innerHTML;
     }
 
     this.setState({ displayValue: displayValue });
@@ -100,6 +95,7 @@ class Calculator extends React.Component {
       },
       BS: () => {
         if (displayValue.length > 0) {
+          // if the removed char is ".", make using dot available
           if(lastChar === ".")
           {
             dot = true;
@@ -160,6 +156,7 @@ class Calculator extends React.Component {
         }
         else if (lastChar !== "") {
           var eq = displayValue;
+          // if route is inclucded in the equation
           if(fisrtChar === "√"){
             displayValue = Math.sqrt(evalFunc(displayValue.substring(2, displayValue.length - 1)));
           }
@@ -251,8 +248,8 @@ class Calculator extends React.Component {
           {this.state.history.map((history_, index) => {
             return (
               <Box onClick={this.onClickHistory} className={history_.equation}>
-                <h3 className={history_.equation}>{history_.equation}</h3>
-                <h3 className={history_.equation}>= {history_.result}</h3>
+                <h3 className="equation">{history_.equation}</h3>
+                <h3 className="result">= {history_.result}</h3>
               </Box>
             )
           })}
